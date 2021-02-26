@@ -7,17 +7,32 @@ namespace parlem.api.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly GetCustomerUseCase getCustomerUseCase;
+        private readonly GetCustomerByIdUseCase getCustomerByIdUseCase;
+        private readonly GetCustomersListUseCase getCustomersListUseCase;
 
-        public CustomerController(GetCustomerUseCase getCustomerUseCase)
+        public CustomerController(GetCustomerByIdUseCase getCustomerByIdUseCase, GetCustomersListUseCase getCustomersListUseCase)
         {
-            this.getCustomerUseCase = getCustomerUseCase;
+            this.getCustomerByIdUseCase = getCustomerByIdUseCase;
+            this.getCustomersListUseCase = getCustomersListUseCase;
         }
+
+        [HttpGet, Route("list")]
+        public IActionResult GetList()
+        {
+            return Ok(getCustomersListUseCase.Execute());
+        }
+
 
         [HttpGet, Route("{customerId}")]
         public IActionResult GetById(int customerId)
         {
-            return Ok(getCustomerUseCase.Execute(customerId));
-        }        
+            return Ok(getCustomerByIdUseCase.Execute(customerId));
+        }
+
+        [HttpGet, Route("{customerId}/products")]
+        public IActionResult GetCustomerProductsList(int customerId)
+        {
+            return Ok(getCustomerByIdUseCase.Execute(customerId).CustomerProducts);
+        }
     }
 }

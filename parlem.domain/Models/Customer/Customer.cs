@@ -1,4 +1,7 @@
-﻿namespace parlem.domain.Models.Customer
+﻿using System.Collections.Generic;
+using Model = parlem.domain.Models.Product;
+
+namespace parlem.domain.Models.Customer
 {
     public class Customer
     {
@@ -9,6 +12,7 @@
         private string givenName;
         private string familyName1;
         private string phoneNumber;
+        private List<Model.Product> customerProducts;
 
         public int CustomerId { get => customerId; set => customerId = value; }
         public string DocType { get => docType; set => docType = value; }
@@ -17,5 +21,6 @@
         public string GivenName { get => givenName; set => givenName = value; }
         public string FamilyName1 { get => familyName1; set => familyName1 = value; }
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
+        public List<Model.Product> CustomerProducts { get => customerProducts; set => customerProducts = value; }
     }
 }

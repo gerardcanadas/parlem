@@ -7,5 +7,6 @@ namespace parlem.domain.Models.Customer.Interfaces
     public interface ICustomerRepository
     {
         Customer GetById(int customerId);
+        List<Customer> GetList();
     }
 }

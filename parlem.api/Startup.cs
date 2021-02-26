@@ -26,7 +26,8 @@ namespace parlem.api
         {
             services.AddScoped<ICustomerRepository, CustomerRepositoryInMemory>();
             services.AddScoped<IProductRepository, ProductRepositoryInMemory>();
-            services.AddScoped(typeof(GetCustomerUseCase));
+            services.AddScoped(typeof(GetCustomerByIdUseCase));
+            services.AddScoped(typeof(GetCustomersListUseCase));
             services.AddScoped(typeof(GetProductUseCase));
 
             services.AddControllers();
@@ -43,6 +44,13 @@ namespace parlem.api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             app.UseAuthorization();
 

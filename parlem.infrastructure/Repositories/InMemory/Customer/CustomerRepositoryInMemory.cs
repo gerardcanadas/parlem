@@ -1,17 +1,17 @@
-﻿using Model = parlem.domain.Models.Customer;
+﻿using CustomerModel = parlem.domain.Models.Customer;
+using ProductModel = parlem.domain.Models.Product;
 using parlem.domain.Models.Customer.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace parlem.infrastructure.Repositories.InMemory.Customer
 {
     public class CustomerRepositoryInMemory : ICustomerRepository
     {
-
-        private List<Model.Customer> customersListInMemory = new List<Model.Customer>()
+        private List<CustomerModel.Customer> customersListInMemory = new List<CustomerModel.Customer>()
         {
-            new Model.Customer()
+            new CustomerModel.Customer()
             {
                 CustomerId = 1,
                 DocType = "NIF",
@@ -19,9 +19,28 @@ namespace parlem.infrastructure.Repositories.InMemory.Customer
                 Email = "test1@parlem.com",
                 GivenName = "Josep Maria",
                 FamilyName1 = "Segura",
-                PhoneNumber = "612345678"
+                PhoneNumber = "612345678",
+                CustomerProducts = new List<ProductModel.Product>()
+                {
+                    new ProductModel.Product()
+                    {
+                        ProductId = 1,
+                        ProductName = "FIBRA 1000 ADAMO",
+                        ProductTypeName = "ftth",
+                        TerminalNumeration = 94332333,
+                        SoldAt = DateTime.Now.AddDays(-3)
+                    },
+                    new ProductModel.Product()
+                    {
+                        ProductId = 2,
+                        ProductName = "FIBRA 2000 ADAMO",
+                        ProductTypeName = "ftth",
+                        TerminalNumeration = 1112333,
+                        SoldAt = DateTime.Now.AddDays(-55)
+                    }
+                }
             },
-            new Model.Customer()
+            new CustomerModel.Customer()
             {
                 CustomerId = 2,
                 DocType = "NIF",
@@ -29,13 +48,29 @@ namespace parlem.infrastructure.Repositories.InMemory.Customer
                 Email = "test2@parlem.com",
                 GivenName = "Montserrat",
                 FamilyName1 = "Ivern",
-                PhoneNumber = "600112234"
+                PhoneNumber = "600112234",
+                CustomerProducts = new List<ProductModel.Product>() 
+                {
+                    new ProductModel.Product()
+                    {
+                        ProductId = 2,
+                        ProductName = "FIBRA 2000 ADAMO",
+                        ProductTypeName = "ftth",
+                        TerminalNumeration = 1112333,
+                        SoldAt = DateTime.Now.AddDays(-55)
+                    }
+                }
             }
         };
 
-        public Model.Customer GetById(int customerId)
+        public CustomerModel.Customer GetById(int customerId)
         {
             return customersListInMemory.FirstOrDefault(x => x.CustomerId == customerId);
+        }
+
+        public List<CustomerModel.Customer> GetList()
+        {
+            return customersListInMemory.ToList();
         }
     }
 }

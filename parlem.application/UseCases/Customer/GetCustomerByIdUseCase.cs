@@ -4,11 +4,11 @@ using Models = parlem.domain.Models.Customer;
 
 namespace parlem.application.UseCases.Customer
 {
-    public class GetCustomerUseCase
+    public class GetCustomerByIdUseCase
     {
         private ICustomerRepository customerRepository;
 
-        public GetCustomerUseCase(ICustomerRepository customerRepository)
+        public GetCustomerByIdUseCase(ICustomerRepository customerRepository)
         {
             this.customerRepository = customerRepository;
         }
