@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { CustomersList } from './components/CustomersList';
-import { CustomerProductsList } from './components/CustomerProductsList';
+import { CustomerDetailsView } from './components/CustomerDetailsView';
 
 import './custom.css'
 
@@ -12,7 +11,7 @@ export default class App extends Component {
   render () {
     return (
       <Layout>
-        <Route exact path='/' component={CustomersList} />
+        <Route exact path='/' component={CustomerDetailsView} />
       </Layout>
     );
   }
